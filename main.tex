@@ -21,11 +21,78 @@
 
 \section{The set up}
 
-Let \(M^n \subseteq \R^{n+1}\) be a smooth, oriented \(n\)-dimensional hypersurface with boundary \(\partial M\) lying on the unit sphere \(\S^n = \{\|x\| = 1\}\). Let \(N\) denote the unit normal to \(M\), \(H\) the mean curvature of \(M\) with respect to \(N\) and \(N_{\S^n}\) the unit normal to the sphere \(\S^n\). We assume that,
+Let \(M^n \subseteq \R^{n+1}\) be a smooth, oriented \(n\)-dimensional hypersurface with boundary \(\partial M\) lying on the unit sphere \(\S^n = \{\|x\| = 1\}\). Let \(\nor\) denote the unit normal to \(M\), \(H\) the mean curvature of \(M\) with respect to \(\nor\) and \(\norS\) the unit normal to the sphere \(\S^n\). Also let \(s = \inpr{X}{\nor}\) denote the support function of \(M\).
+
+We assume that,
 \begin{enumerate}
 \item \(H \equiv \text{const}\) (CMC),
-\item \(\ip{N}{N_{\S^n}} = 0\) along \(\partial M\) (\(M\) meets \(\S^n\) orthogonally),
-\item \(\ip{N}{X} > 0\) where \(X(x) = x\) is the position vector field on \(\R^{n+1}\) (\(M\) is star-shaped).
+\item \(\inpr{\nor}{\norS} = 0\) along \(\partial M\) (\(M\) meets \(\S^n\) orthogonally),
+\item \(s = \inpr{\nor}{X} > 0\) where \(X(x) = x\) is the position vector field on \(\R^{n+1}\) (\(M\) is star-shaped).
+\end{enumerate}  
+Note that \(\norS = X\) along \(\S^n\) and so we also have
+\begin{enumerate}[resume]
+\item \(s = \inpr{\nor}{X} = \inpr{\nor}{\norS} = 0 \text{ along } \partial M\) (zero boundary condition).
 \end{enumerate}
-  
+The orthogonalality condition \(\inpr{\nor}{\norS} = 0\) implies that
+\begin{enumerate}[resume]
+\item \(\norS\) is tangent to \(M\) along \(\partial M\).
+\end{enumerate}
+Furthermore, since \(\partial M \subseteq \S^n\), we have \(T\partial M \subseteq TS^n\) along \(\partial M\) and hence \(T\partial M \perp N_{\S^n}\). We also have \(T\partial M \subseteq TM\) along \(\partial M\) and so \(T\partial M \perp N\). These two facts combined imply that
+\begin{enumerate}[resume]
+\item \(N_{\partial M} = N_{\S^n}\) along \(\partial M\).
+\end{enumerate}
+
+\section{Conventions}
+
+We define the second fundamental form, \(h\) by
+\[
+D_X Y = \nabla_X Y - h(X, Y) N
+\]
+or in other words,
+\[
+h(X, Y) = -\inpr{D_X Y}{N} = \inpr{Y}{D_X N}.
+\]
+
+\section{The computation}
+
+We use the following:
+\begin{align}
+\Delta |X|^2 &= -2 H s + 2n, \label{eq:DeltaX2} \\
+\Delta s &= H - |A|^2 s. \label{eq:Deltas}
+\end{align}
+
+Integrating equation \eqref{eq:DeltaX2} gives
+\[
+\int_{\partial M} \inpr{X}{\nabla_{\norS} X} = \frac{1}{2} \int_M \Delta |X|^2 = -H \int_M s + n |M|.
+\]
+Observe that \(\nabla X = \Id\) and as noted, along \(\partial M\), \(X = \nor\) hence \(\inpr{X}{\nabla_{\norS} X} = \inpr{\norS}{\norS} = 1\). Therefore, \(|\partial M| = -H \int_M s + n |M|\) which we write as
+\begin{equation}
+\label{eq:intDeltaX2}
+n |M| = H \int_M s + |\partial M|.
+\end{equation}
+
+Integrating equation \eqref{eq:Deltas} gives
+\[
+\begin{split}
+H |M| - \int_M |A|^2 s &= \int \Delta s = \int_{\partial M} \nabla_{\norS} s \\
+&= \int_{\partial M} \nabla_{\norS} \inpr{X}{\nor} = \int_{\partial_M} \inpr{\norS}{\nor} + \inpr{X}{\nabla_{\norS} \nor} \\
+&= \int_{\partial_M} A(\norS, \norS).
+\end{split}
+\]
+That is,
+\begin{equation}
+\label{eq:intDeltas}
+H |M| = \int_M |A|^2 s + \int_{\partial M} A(\norS, \norS).
+\end{equation}
+
+Then from equations \eqref{eq:intDeltaX2} and \eqref{eq:intDeltas} we deduce
+\[
+H^2 \int_M s + H |\partial M| = n H |M| = n \int_M |A|^2 s + n \int_{\partial M} A(\norS, \norS).
+\]
+That is
+\[
+\int_{\partial_M} H - n A(\norS, \norS) = \int_M (n|A|^2 - H^2) s
+\]
+Notice that the term \(n|A|^2 - H^2 \geq 0\) equalling \(0\) precisely at umbilic points and that the star shaped assumption is \(s > 0\).
+
 \end{document}
