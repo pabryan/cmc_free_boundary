@@ -440,131 +440,161 @@ Combining this with \eqref{EQumbilic} yields the result.
 %Combining this with \eqref{EQumbilic} yields the result.
 %\end{proof}
 
+We establish some conventions and basic formulae. Let \(D\) denote the Euclidean connection. Let \(g\) denote metric on \(TM\) induced by the embedding \(M \to (\R^3, \IP{\cdot}{\cdot})\) and let \(\nabla\) be the corresponding Levi-Civita connection. Then for any \(X, Y \in T_xM\)
+\begin{equation}
+\label{eq:levi_civita}
+\nabla_X Y = \pi_{TM} (D_X Y)
+\end{equation}
+where \(\pi_{TM}\) is the orthogonal projection, \(T\R^3 \to TM\) over \(M\) onto the tangent bundle \(TM\).
+
+We define the second fundamental form, \(h\) of \(M\) by
+\[
+h(X, Y) = \pi_{\nu M} (D_X Y)
+\]
+where \(\pi_{\nu M}\) is the orthogonal projection \(T\R^3 \to \nu M\) over \(M\) onto the normal bundle \(\nu M\). Then we may write
+\begin{equation}
+\label{eq:gauss}
+D_X Y = \nabla_X Y + h(X, Y) \nu^M
+\end{equation}
+so that
+\begin{equation}
+\label{eq:sff}
+h(X, Y) = \IP{D_X Y}{\nu^M} = \IP{Y}{-D_X \nu^M}.
+\end{equation}
+
+Now we establish our conventions relating to \(\partial M\). First, along \(\partial M\) we have
+\begin{equation}
+\label{eq:boundary_orthgonal}
+\nu^M \perp \nu^{\S^2} = F = \nu^{\partial M}
+\end{equation}
+where \(F\) is the position vector field in \(\R^3\), \(\nu^M\) is the unit normal to \(M \subseteq \R^3\), \(\nu^{\S^2}\) is the unit normal to \(\S^2 \subseteq \R^3\) and \(\nu_{\partial M}\) is the unit normal to \(\partial M \subseteq M\).
+
+Let us write \(\gamma\) for a connected component of \(\partial M\) and parametrise it by arc-length. Let \(T = \gamma_s\) be the unit tangent vector. Write
+\begin{equation}
+\label{eq:euclidean_kappa}
+D_T T = \gamma_{ss} = \kappa^{\R^3} N^{\R^3}
+\end{equation}
+with \(\kappa^{\R^3}\) the geodesic curvature of \(\gamma\) (defined up to sign) as a curve in \(\R^3\) and \(N^{\R^3}\) the unit normal to \(\gamma\) in \(\R^3\). Note that since \(\gamma \subseteq \S^2\), we have \(\kappa^{\R^3} \ne 0\) and so \(N^{\R^3} = \tfrac{\gamma_{ss}}{|\gamma_{ss}|}\) is well defined.
+
+Let us also write
+\begin{equation}
+\label{eq:boundary_kappa_vector}
+\vec{\kappa} = \pi_{TM} (\gamma_{ss}) = \gamma_{ss} - \IP{\gamma_{ss}}{\nu^M} \nu^M.
+\end{equation}
+That is the curvature vector, \(\vec{\kappa}\) in \(M\) is the projection of \(\gamma_{ss}\), the Euclidean curvature vector onto the tangent space to \(M\). Note \(\{T, \nu^{\partial M}\}\) forms an oriented, orthonormal basis of \(TM\) along \(\partial M\) so that \(N = \nu^{\partial M}\) is a unit length normal field to \(\gamma\)  in \(M\). Then as \(\vec{\kappa} \perp T\) we may write 
+\begin{equation}
+\label{eq:boundary_kappa}
+\vec{\kappa} = \kappa N, \quad \kappa = \IP{\vec{\kappa}}{N} = \IP{\gamma_{ss}}{\gamma}.
+\end{equation}
+Finally, using equation \eqref{eq:gauss} for the second fundamental form and equations \eqref{eq:euclidean_kappa}, \eqref{eq:boundary_kappa_vector} and \eqref{eq:boundary_kappa} for the geodesic curvatures we have 
+\[
+\kappa N = \pi_{TM} (\kappa^{\R^3} N^{\R^3}) = \pi_{TM} (\nabla_T T + h(T, T) \nu^M) = \nabla_T T.
+\]
+Since \(T \perp N\) we also have
+\[
+0 = \partial_T [g(T, N)] = g(\nabla_T T, N) + g(T, \nabla_T N) = \kappa + g(T, \nabla_T N).
+\]
+As \(N\) is unit length, \(\nabla_T N \perp N\) and hence we obtain the Frenet-Serret equations,
+\begin{equation}
+\label{eq:frenet_serret}
+\nabla_T T = \kappa N, \quad \nabla_T N = -\kappa T.
+\end{equation}
+
 \begin{lem}
 If \(M^2 \subseteq \R^3\) is a CMC hypersurface with boundary \(\partial M \subseteq \S^2\) meeting \(\S^2\) orthogonally, then \(\partial M\) is a union of geodesic circles.
 \end{lem}
 
 \begin{proof}
-Along \(\partial M\) we have
-\[
-\nu^M \perp \nu^{\S^2} = F = \nu^{\partial M}
-\]
-where \(F\) is the position vector field in \(\R^3\), \(\nu^M\) is the unit normal to \(M \subseteq \R^3\), \(\nu^{\S^2}\) is the unit normal to \(\S^2 \subseteq \R^3\) and \(\nu_{\partial M}\) is the unit normal to \(\partial M \subseteq M\).
-
-Let us write \(\gamma\) for a connected component of \(\partial M\) and parametrise it by arc-length. Let \(T = \gamma_s\) be the unit tangent vector. Write
-\[
-\gamma_{ss} = \kappa^{\R^3} N^{\R^3}
-\]
-with \(\kappa^{\R^3}\) the geodesic curvature of \(\gamma\) (defined up to sign) as a curve in \(\R^3\) and \(N^{\R^3}\) the unit normal to \(\gamma\) in \(\R^3\). Note that since \(\gamma \subseteq \S^2\), we have \(\kappa^{\R^3} \ne 0\) and so \(N^{\R^3} = \tfrac{\gamma_{ss}}{|\gamma_{ss}|}\) is well defined.
-
-Let us also write
-\[
-\kappa^M N^M = \pi_{TM} (\gamma_{ss}) = \gamma_{ss} - \IP{\gamma_{ss}}{\nu^M}.
-\]
-That is \(\kappa^M N^M\) is the projection of \(\gamma_{ss}\) onto the tangent space to \(M\). Since \(M\) is oriented, we may choose \(N^M\) such that \(\{T, N^M\}\) forms an oriented, orthonormal basis of \(TM\) along \(\partial M\) so that
-\[
-\kappa^M = \IP{\gamma_{ss}}{N^m}
-\]
-is defined possibly taking positive and negative values. Note also that since \(|\gamma_s| = 1\), \(\gamma_{ss} \perp \gamma_s = T\) and so \(N^M \perp T\). Note that \(\{T, \nu^{\partial M}\}\) also forms an oriented, orthonormal basis of \(TM\) along \(\partial M\) so that we may choose
-\[
-N^M = \nu^{\partial M} = \nu^{\S^2} = \gamma.
-\]
 In fact, from \(|\gamma| = 1\), we have \(\IP{\gamma_s}{\gamma} = 0\) and hence
 \[
 0 = \partial_s \IP{\gamma_s}{\gamma} = \IP{\gamma_{ss}}{\gamma} + \IP{\gamma_s}{\gamma_s}.
 \]
-That is,
-\[
-\kappa^M = \IP{\gamma_{ss}}{\gamma} = -\IP{\gamma_s}{\gamma_s} = -1.
-\]
+Thus, using the definition \eqref{eq:boundary_kappa},
+\begin{equation}
+\label{eq:boundary_kappa_const}
+\kappa = \IP{\gamma_{ss}}{\gamma} = -\IP{\gamma_s}{\gamma_s} = -1.
+\end{equation}
 
-Now, the second fundamental form, \(h\) of \(M\) is defined by,
-\[
-D_X Y = \nabla^M_X Y - h(X, Y) \nu^M
-\]
-where \(D\) is the Euclidean connection on \(\R^3\) and \(\nabla^M_X Y = \pi_{TM} (D_X Y)\) is projection of \(D_X Y\) onto \(TM\). Then
-\[
-h(X, Y) = - \IP{D_X Y}{\nu^M} = \IP{Y}{D_X \nu^M}.
-\]
 
-We then have
+We now have using the definition of the second fundamental form and equation \eqref{eq:boundary_kappa_const},
 \[
-\gamma_{ss} = D_T T = \kappa^{\R^3} N^{\R^3} = \kappa^M N^M - h(T, T) \nu^M = N^M - h(T, T) \nu^M.
+\gamma_{ss} = \kappa^{\R^3} N^{\R^3} = D_T T = \nabla_T T - h(T, T)\nu^M = \kappa N - h(T, T) \nu^M = -N - h(T, T) \nu^M.
 \]
 In particular,
 \[
-(\kappa^{\R^3})^2 = (\kappa^M)^2 + h(T, T)^2 = 1 + h(T, T)^2
+(\kappa^{\R^3})^2 = (\kappa)^2 + h(T, T)^2 = 1 + h(T, T)^2
 \]
-since \(N^M \in TM\) so that \(N^M \perp \nu^M\).
+since \(N \in TM\) so that \(N \perp \nu^M\).
 
 Moreover we have
 \[
-\IP{D_T \nu^M}{N^M} = - \IP{\nu^M}{D_T N^M} = -\IP{\nu^M}{D_T \gamma} = \IP{\nu^M}{T} = 0.
+\IP{D_T \nu^M}{N} = - \IP{\nu^M}{D_T N} = -\IP{\nu^M}{D_T \gamma} = \IP{\nu^M}{T} = 0.
 \]
-That is, \(D_T \nu^M \perp N^M\) and since \(\D_T \nu^M \in TM = \text{span} \{T, N^M\}\) we have
+That is, \(D_T \nu^M \perp N\) and since \(D_T \nu^M \in TM = \text{span} \{T, N\}\) we have
 \[
 D_T \nu^M = h(T, T) T.
 \]
 Likewise,
 \[
-\IP{D_{N^M} \nu^M}{T} = -\IP{\nu^M}{D_{N^M} T} = -\IP{\nu^M}{D_T N^M} = \IP{D_T \nu^M}{N^M} = 0,
+\IP{D_{N} \nu^M}{T} = -\IP{\nu^M}{D_{N} T} = -\IP{\nu^M}{D_T N} = \IP{D_T \nu^M}{N} = 0,
 \]
 and hence
 \[
-D_{N^M} \nu^M = h(N^M, N^M) N^M.
+D_{N} \nu^M = h(N, N) N.
 \]
+Therefore \(\{T, N\}\) diagonalises \(h\) along \(\gamma\).
 
-Now we show that \(h(N^M, N^M) \equiv \text{constant}\) along \(\partial M\). We have
+Now we show that \(h(N, N) \equiv \text{constant}\) along \(\partial M\). We have
 \[
-D_T \left(h(N^M, N^M)\right) = D_T \IP{N^M}{D_{N^M} \nu^M} = \IP{D_T N^M}{D_{N^M} \nu^M} + \IP{N^M}{D_T D_{N^M} \nu^M}.
+D_T \left(h(N, N)\right) = D_T \IP{N}{D_{N} \nu^M} = \IP{D_T N}{D_{N} \nu^M} + \IP{N}{D_T D_{N} \nu^M}.
 \]
 
 The first term in the sum on the right vanishes because
 \[
-\IP{D_T N^M}{D_{N^M} \nu^M} = h(N^M, N^M) \IP{D_T N^M}{N^M} = \frac{1}{2} h(N^M, n^M) D_T \IP{N^M}{N^M} = 0.
+\IP{D_T N}{D_{N} \nu^M} = h(N, N) \IP{D_T N}{N} = \frac{1}{2} h(N, n^M) D_T \IP{N}{N} = 0.
 \]
 
 The second term in the sum also vanishes. To see this, first parametrise a neighbourhood of \(\partial M\) in \(M\) by
 \[
-\varphi(r, s) = \exp^M_{\gamma(s)} (r N^M(\gamma(s))).
+\varphi(r, s) = \exp^M_{\gamma(s)} (r N(\gamma(s))).
 \]
 Then
 \[
-\varphi_{\ast} \partial_r |_{r=0} = N^M, \quad \varphi_{\ast} \partial_s |_{r=0} T.
+\varphi_{\ast} \partial_r |_{r=0} = N, \quad \varphi_{\ast} \partial_s |_{r=0} T.
 \]
 By an abuse of notation, we write for any \(r\),
 \[
-\varphi_{\ast} \partial_r = N^M, \quad \varphi_{\ast} \partial_s = T
+\varphi_{\ast} \partial_r = N, \quad \varphi_{\ast} \partial_s = T
 \]
-the extension of \(T, N^M\) to the neighbourhood. Now we have
+the extension of \(T, N\) to the neighbourhood. Now we have
 \[
-[T, N^M] = \varphi_{\ast} [\partial_s, \partial_r] = 0
+[T, N] = \varphi_{\ast} [\partial_s, \partial_r] = 0
 \]
-and since for each fixed \(s\), \(r \mapsto \exp^M_{\gamma(s)} (rN^M(\gamma(s)))\) is a geodesic with velocity vector \(N^M\), we also have
+and since for each fixed \(s\), \(r \mapsto \exp^M_{\gamma(s)} (rN(\gamma(s)))\) is a geodesic with velocity vector \(N\), we also have
 \[
-\nabla^M_{N^M} N^M = 0.
+\nabla_{N} N = 0.
 \]
 
 Now we compute,
 \[
 \begin{split}
-\IP{N^M}{D_T D_{N^M} \nu^M} &= \IP{N^M}{D_{N^M} D_T \nu^M + D_{[T, N^M]} \nu^M} \\
-&= D_{N^M} \IP{N^M}{D_T \nu^M} - \IP{D_{N^M} N^M}{D_T \nu^M} + \IP{N^M}{D_{[T, N^M]} \nu^M} \\
-&= D_{N^M} \IP{N^M}{h(T, T) T} - \IP{\nabla^M_{N^M} N^M - h(N^M, N^M) N^M}{h(T, T) T} \\
-&= -\IP{\nabla^M_{N^M} N^M}{h(T, T) T} 
+\IP{N}{D_T D_{N} \nu^M} &= \IP{N}{D_{N} D_T \nu^M + D_{[T, N]} \nu^M} \\
+&= D_{N} \IP{N}{D_T \nu^M} - \IP{D_{N} N}{D_T \nu^M} + \IP{N}{D_{[T, N]} \nu^M} \\
+&= D_{N} \IP{N}{h(T, T) T} - \IP{\nabla_{N} N - h(N, N) N}{h(T, T) T} \\
+&= -\IP{\nabla_{N} N}{h(T, T) T} 
 \end{split}
 \]
-where the last equality follows since \(N^M \perp T\). Using that relation again, to finish we have
+where the last equality follows since \(N \perp T\). Using that relation again, to finish we have
 \[
 \begin{split}
-\IP{N^M}{D_T D_{N^M} \nu^M} &= -\nabla^M_{N^M} \IP{N^M}{h(T, T) T} + \IP{N^M}{\nabla^M_{N^M} [h(T, T) T]} \\
-&= \IP{N^M}{h(T, T) \nabla^M_{N^M} T} \\
-&= h(T, T) \IP{N^M}{\nabla^M_T N^M} \\
-&= \frac{1}{2} h(T, T) D_T \IP{N^M}{N^M} = 0.
+\IP{N}{D_T D_{N} \nu^M} &= -\nabla_{N} \IP{N}{h(T, T) T} + \IP{N}{\nabla_{N} [h(T, T) T]} \\
+&= \IP{N}{h(T, T) \nabla_{N} T} \\
+&= h(T, T) \IP{N}{\nabla_T N} \\
+&= \frac{1}{2} h(T, T) D_T \IP{N}{N} = 0.
 \end{split}
 \]
 
-Thus we obtain that along \(\partial M\), \(h(N^M, N^M)\) is constant.
+Thus we obtain that along \(\partial M\), \(h(N, N)\) is constant.
 
 So far all we have assumed is that \(\partial M\) meets \(\S^2\) orthogonally. Now we have use that \(M\) is CMC to conclude
 \[
