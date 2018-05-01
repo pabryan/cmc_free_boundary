@@ -1,0 +1,222 @@
+\documentclass[10pt]{amsart}
+
+\usepackage{amssymb, amsthm, amsmath, graphicx, yfonts, wasysym, appendix, url, verbatim}
+\usepackage[margin=4cm]{geometry}
+\usepackage{rotating}
+\usepackage{amsbsy,enumerate}
+\usepackage{graphicx}
+\usepackage{ccaption}
+\usepackage{xcolor}
+\usepackage{times}
+\usepackage{wrapfig}
+\usepackage{amsmath, amssymb, amsthm} %Also recommend the standard AMS LaTeX maths packages.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Some useful macros.
+\newcommand{\pD}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\IT}[1]{\intertext{\flushright\small\parbox{3in}{\flushright #1}}}
+\newcommand{\HL}[1]{\textbf{\textit{#1}}}
+\newcommand{\auth}[1]{\hskip+1in\textit{Authored by #1}.\vspace{1cm}}
+\newcommand{\T}[1]{\tilde{#1}}
+\newcommand{\myover}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+\newcommand{\vn}[1]{\lVert#1\rVert}
+\newcommand{\IP}[2]{\left< #1 , #2 \right>}
+\newcommand{\eIP}[2]{\left(\left. #1 \hskip+0.5mm\right| #2 \right)}
+\newcommand{\rD}[2]{\frac{d #1}{d #2}}
+\newcommand{\tpD}[2]{\text{\tiny$\frac{\partial #1}{\partial #2}$}}
+\newcommand{\sfrac}[2]{\text{\fontsize{5}{5}\selectfont$\frac{#1}{#2}$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Some non-LaTeX native symbols I use.
+\newcommand{\arccosh}{\text{arccosh}}
+\newcommand{\Q}{\ensuremath{\mathcal{Q{}}}}
+\renewcommand{\P}{\ensuremath{\mathcal{P{}}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\D}{\ensuremath{\mathbb{D}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\renewcommand{\S}{\ensuremath{\mathbb{S}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\SD}{\ensuremath{\mathcal{D{}}}}
+\newcommand{\SB}{\ensuremath{\mathcal{B{}}}}
+\newcommand{\SW}{\ensuremath{\mathcal{W{}}}}
+\newcommand{\SY}{\ensuremath{\mathcal{Y{}}}}
+\newcommand{\SH}{\ensuremath{\mathcal{H{}}}}
+\newcommand{\SK}{\ensuremath{\mathcal{K{}}}}
+\newcommand{\SL}{\ensuremath{\mathcal{L{}}}}
+\newcommand{\SA}{\ensuremath{\mathcal{A{}}}}
+\newcommand{\SX}{\ensuremath{\mathcal{X{}}}}
+\newcommand{\SI}{\ensuremath{\mathcal{I{}}}}
+\newcommand{\SP}{\ensuremath{\mathcal{P{}}}}
+\newcommand{\SU}{\ensuremath{\mathcal{U{}}}}
+\newcommand{\SC}{\ensuremath{\mathcal{C{}}}}
+\newcommand{\SG}{\ensuremath{\mathcal{G{}}}}
+\newcommand{\SR}{\ensuremath{\mathcal{R{}}}}
+\renewcommand{\SS}{\ensuremath{\mathcal{S{}}}}
+
+\newcommand{\Div}{\text{div}}
+\renewcommand{\L}{\ensuremath{\mathcal{L}}}
+\newcommand{\g}{\textswab{g}}
+\newcommand{\Cmss}{\ensuremath{C_{M\!S\!S}}}
+\newcommand{\ts}[2]{\ensuremath{\text{$\textstyle\frac{#1}{#2}$}}}
+\newcommand{\lb}{\ensuremath{<\hskip-2mm<}}
+\newcommand{\rb}{\ensuremath{>\hskip-2mm>}}
+\newcommand{\gmcfh}{GMCF${}^{H \le\, 0}$}
+
+\allowdisplaybreaks[4]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Theorem environments.
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{id}[thm]{Identity}
+\newtheorem{est}[thm]{Estimate}
+\newtheorem*{uthm}{Theorem}
+\newtheorem*{uprop}{Proposition}
+\newtheorem*{ulem}{Lemma}
+\newtheorem*{defn}{Definition}
+\newtheorem{conds}[thm]{Conditions}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem*{cond}{Condition}
+
+\title{Rotationally Symmetric CMC in the Ball}
+\author{}
+\keywords{minimal hypersurface, mean curvature, free boundary, geometric
+analysis} \subjclass[2000]{49Q05\and 53A10}
+
+
+\begin{document}
+
+\begin{abstract}
+In this note we use the strong maximum principle to show that CMC hypersurfaces with free boundary in (for the outside we need a noncompact max principle working for free boundary hypersurfaces in the ball) the ball and graphical in a rotation of the Euclidean space are either flat or rotationally symmetric. This is independent of topology or dimension.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+
+\begin{thm}[Graphical in a rotation CMC are either flat or rotationally symmetric]
+Let $F:M^n\rightarrow\R^{n+1}$ be a smooth rotation Killing-graphical CMC
+hypersurface with free boundary on $\S^n\subset\R^{n+1}$. Let the graph direction $K$ be a rotation of the Euclidean space. Then $M^n = \D^n$
+and $M := F(M^n)$ is a standard flat disk or it is rotationally symmetric with rotation $K$.
+\label{thmuniqueness}
+\end{thm}
+
+%{{{
+In the above statement, we use Killing-graphical to mean that the function
+$s:M\rightarrow\R$ given by
+\begin{equation}
+\label{EQsV}
+s(x) := \IP{\nu^M(x)}{V(x)}\,,
+\end{equation}
+where $\nu^M:M\rightarrow\R^{n+1}$ is a unit normal vector field along $F(M^n)$,
+and $V:\R^{n+1}\rightarrow\R^{n+1}$ is a Killing field,
+is positive.
+
+\rmk{Weakly graphical only} We do not require the strict graphicallity. If that is true then we obtain uniqueness of CMC disks.
+\section{Setting}%{{{
+
+Consider the standard unit sphere in Euclidean space $\S^n = \{x\in\R^{n+1}\,:\,|x|=1\}\subset
+\R^{n+1}$.
+We use $\nu^{\S^n}:\S^{n}\rightarrow\R^{n+1}$ to denote its outer
+normal vectorfield.
+Let $M^n$ be a smooth, orientable $n$-dimensional Hausdorff paracompact manifold with boundary $\partial M^n$.
+Let $g$ be a Riemannian metric on $M^n$.
+Set $M:=F(M^n)\subset{\R}^{n+1}$ where $F:M^n\rightarrow {\R}^{n+1}$ is a
+smooth isometric immersion satisfying
+\begin{align}
+&{\partial} M \ \equiv \ F({\partial} M^n)\ =\ M \cap \S^n,\notag\\
+&\IP{{\nu}^M}{{\nu}^{\S^n}}(F(p))\ =\ 0, \text{ }\forall
+p~\in{\partial} M^n.
+\label{initial}
+\end{align}
+Since $F$ is isometric, the Riemannian structure induced by the embedding $F$
+is the same as that given by $g$, that is $(M^n, g) = (M^n, F^*\delta)$, where
+$\delta$ is the standard metric on $\R^n$.
+
+Let us denote by $A:T M\times T M \rightarrow \R$ the second fundamental form
+of $M$ with components given by $h_{ij}$ where $1\leq i,j\leq n$ where $h_{ij}=
+A(\tau_i,\tau_j)$ for two sections $\tau_i$ and $\tau_j$ in $TM$.
+For $\S^n$ we have $A^{\S^n}:T \S^n \times T\S^n\rightarrow \R$ the
+second fundamental form with components $h^{\S^n}_{ij}$ for $1\leq i,j\leq
+n$.
+%}}}
+
+\section{Auxiliary Equations}
+
+%{{{
+Let us define the quantities we use in the proof of the uniqueness theorem.
+Recall the function $s:M\rightarrow\R$ defined in \eqref{EQsV} above.
+When $V$ is a translation, following \cite{ecker1989mce} we term $s$ the \emph{graph quantity}.
+If, up to reparametrisation,
+\[
+F(p) = (p,u(p)) = p_ie_i + u(p)V\,,
+\]
+then one can relate the gradient of the associated scalar function $u$ to the
+reciprocal of the graph quantity $s$. This implies that a lower bound on $s$
+is equivalent to a gradient bound for $u$.
+Throughout this section we assume that $F:M^n\rightarrow\R^{n+1}$ is a smooth
+minimal immersed hypersurface.
+
+\begin{lem} The quantity $s:M\rightarrow\R$
+satisfies
+\begin{align*}
+{\Delta}^M s = - |A|^2 s\,.
+\end{align*}
+where $\Delta^M$ is the Laplace-Beltrami operator on $M$.
+\label{sevolution}
+\end{lem}
+
+Note that for any choice of orthonormal basis of the tangent space of $\S^n$
+the second fundamental form of $\S^n$ is diagonal.
+It was shown by Stahl \cite{stahl1996convergence} that on the boundary we have
+\begin{align*}
+h_{in}=h^{\S^n}_{in}=0\quad \text{ for all }\quad i=1,\ldots,n-1.
+\end{align*}
+Since $n-1$ of the tangent vectors are on the closed submanifold $\partial M\subset\S^n$ we can choose
+our basis above such that on the boundary
+\begin{align*}
+h_{ij}=0\quad  \text{ if } \quad i\neq j\,,\quad \text{ and }\quad h^{\S^n}_{ij}=\delta_{ij}\quad\text{ if }\quad i\neq j.
+\end{align*}
+\section{Minimal graphical hypersurfaces with free boundary are flat disks}
+\label{KillingSection}
+
+Now assume that
+\begin{align}
+	s \geq 0 \label{graphcondition}\,.
+\end{align}
+We shall prove Theorem \ref{thmuniqueness}.
+
+\begin{proof}
+Apply the elliptic maximum principle to the evolution of $s0\geq 0$ to see that
+there is no interior minima. On the boundary we note that $\nabla_{\nu_\S^n}s=0$ using
+$=\nu^{\S^n}$, the Neumann boundary condition and the  of the second fundamental form on the boundary. 
+
+\begin{align*}
+\nabla_{\nu_\S^n}s_v = h_{nn}\IP{\nu^{\S^n}}{K} = 0\,.
+\end{align*}
+This implies that $s_v$ has no boundary minima either.  Therefore $s_v$ is constant everywhere on $\bar M$.
+
+Returning to the evolution of $s_v$ on the interior this tells us that
+\begin{align*}
+{\Delta}^M s_V = - |A|^2 s_V\,,
+\end{align*}
+implying that either $M$ is a flat disc or $K\in TM$ everywhere on $M$, making $M$ rotationally symmetric. 
+\end{proof}
+
+\begin{rmk}
+The bounded curvature is required for the evolution of the $s_v$.
+\end{rmk}
+
+
+\section*{acknowledgements}
+
+\bibliographystyle{plain}
+\bibliography{mbib}
+
+\end{document}

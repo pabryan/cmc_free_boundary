@@ -1,0 +1,585 @@
+\documentclass[10pt]{amsart}
+
+\usepackage{amssymb, amsthm, amsmath, graphicx, yfonts, wasysym, appendix, url, verbatim}
+\usepackage[margin=4cm]{geometry}
+\usepackage{rotating}
+\usepackage{amsbsy,enumerate}
+\usepackage{graphicx}
+\usepackage{ccaption}
+\usepackage{xcolor}
+\usepackage{times}
+\usepackage{wrapfig}
+\usepackage{amsmath, amssymb, amsthm} %Also recommend the standard AMS LaTeX maths packages.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Some useful macros.
+\newcommand{\pD}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\IT}[1]{\intertext{\flushright\small\parbox{3in}{\flushright #1}}}
+\newcommand{\HL}[1]{\textbf{\textit{#1}}}
+\newcommand{\auth}[1]{\hskip+1in\textit{Authored by #1}.\vspace{1cm}}
+\newcommand{\T}[1]{\tilde{#1}}
+\newcommand{\myover}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+\newcommand{\vn}[1]{\lVert#1\rVert}
+\newcommand{\IP}[2]{\left< #1 , #2 \right>}
+\newcommand{\eIP}[2]{\left(\left. #1 \hskip+0.5mm\right| #2 \right)}
+\newcommand{\rD}[2]{\frac{d #1}{d #2}}
+\newcommand{\tpD}[2]{\text{\tiny$\frac{\partial #1}{\partial #2}$}}
+\newcommand{\sfrac}[2]{\text{\fontsize{5}{5}\selectfont$\frac{#1}{#2}$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Some non-LaTeX native symbols I use.
+\newcommand{\arccosh}{\text{arccosh}}
+\newcommand{\Q}{\ensuremath{\mathcal{Q{}}}}
+\renewcommand{\P}{\ensuremath{\mathcal{P{}}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\D}{\ensuremath{\mathbb{D}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\renewcommand{\S}{\ensuremath{\mathbb{S}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\SD}{\ensuremath{\mathcal{D{}}}}
+\newcommand{\SB}{\ensuremath{\mathcal{B{}}}}
+\newcommand{\SW}{\ensuremath{\mathcal{W{}}}}
+\newcommand{\SY}{\ensuremath{\mathcal{Y{}}}}
+\newcommand{\SH}{\ensuremath{\mathcal{H{}}}}
+\newcommand{\SK}{\ensuremath{\mathcal{K{}}}}
+\newcommand{\SL}{\ensuremath{\mathcal{L{}}}}
+\newcommand{\SA}{\ensuremath{\mathcal{A{}}}}
+\newcommand{\SX}{\ensuremath{\mathcal{X{}}}}
+\newcommand{\SI}{\ensuremath{\mathcal{I{}}}}
+\newcommand{\SP}{\ensuremath{\mathcal{P{}}}}
+\newcommand{\SU}{\ensuremath{\mathcal{U{}}}}
+\newcommand{\SC}{\ensuremath{\mathcal{C{}}}}
+\newcommand{\SG}{\ensuremath{\mathcal{G{}}}}
+\newcommand{\SR}{\ensuremath{\mathcal{R{}}}}
+\renewcommand{\SS}{\ensuremath{\mathcal{S{}}}}
+
+\newcommand{\Div}{\text{div}}
+\renewcommand{\L}{\ensuremath{\mathcal{L}}}
+\newcommand{\g}{\textswab{g}}
+\newcommand{\Cmss}{\ensuremath{C_{M\!S\!S}}}
+\newcommand{\ts}[2]{\ensuremath{\text{$\textstyle\frac{#1}{#2}$}}}
+\newcommand{\lb}{\ensuremath{<\hskip-2mm<}}
+\newcommand{\rb}{\ensuremath{>\hskip-2mm>}}
+\newcommand{\gmcfh}{GMCF${}^{H \le\, 0}$}
+
+\allowdisplaybreaks[4]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Theorem environments.
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{id}[thm]{Identity}
+\newtheorem{est}[thm]{Estimate}
+\newtheorem*{uthm}{Theorem}
+\newtheorem*{uprop}{Proposition}
+\newtheorem*{ulem}{Lemma}
+\newtheorem*{defn}{Definition}
+\newtheorem{conds}[thm]{Conditions}
+
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem*{cond}{Condition}
+
+\title{CMC in the Ball yo}
+\author{}
+\keywords{minimal hypersurface, mean curvature, free boundary, geometric
+analysis} \subjclass[2000]{49Q05\and 53A10}
+
+
+\begin{document}
+
+\begin{abstract}
+In this article we study CMC hypersurfaces with free boundary.
+We use the strong maximum principle to show that CMC hypersurfaces with free
+boundary in (for the outside we need a noncompact max principle working for
+free boundary hypersurfaces in the ball) the ball and graphical in a rotation
+of the Euclidean space are either flat or rotationally symmetric.  This is
+independent of topology or dimension.
+We also give a classification of free boundary CMC surfaces without an
+additional hypothesis on their stability.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}%{{{
+
+
+\begin{thm}[Graphical in a rotation CMC are either flat or rotationally symmetric]
+Let $F:M^n\rightarrow\R^{n+1}$ be a smooth rotation Killing-graphical CMC
+hypersurface with free boundary on $\S^n\subset\R^{n+1}$. Let the graph direction $K$ be a rotation of the Euclidean space. Then $M^n = \D^n$
+and $M := F(M^n)$ is a standard flat disk or it is rotationally symmetric with rotation $K$.
+\label{thmuniqueness}
+\end{thm}
+
+In the above statement, we use Killing-graphical to mean that the function
+$s:M\rightarrow\R$ given by
+\begin{equation}
+\label{EQsV}
+s(x) := \IP{\nu^M(x)}{V(x)}\,,
+\end{equation}
+where $\nu^M:M\rightarrow\R^{n+1}$ is a unit normal vector field along $F(M^n)$,
+and $V:\R^{n+1}\rightarrow\R^{n+1}$ is a Killing field,
+is positive.
+
+\rmk{Weakly graphical only} We do not require the strict graphicality. If that is true then we obtain uniqueness of CMC disks.
+
+%}}}
+
+\section{Setting}%{{{
+
+Consider the standard unit sphere in Euclidean space $\S^n = \{x\in\R^{n+1}\,:\,|x|=1\}\subset
+\R^{n+1}$.
+We use $\nu^{\S^n}:\S^{n}\rightarrow\R^{n+1}$ to denote its outer
+normal vectorfield.
+Let $M^n$ be a smooth, orientable $n$-dimensional Hausdorff paracompact manifold with boundary $\partial M^n$.
+Let $g$ be a Riemannian metric on $M^n$.
+Set $M:=F(M^n)\subset{\R}^{n+1}$ where $F:M^n\rightarrow {\R}^{n+1}$ is a
+smooth isometric immersion satisfying
+\begin{align}
+&{\partial} M \ \equiv \ F({\partial} M^n)\ =\ M \cap \S^n,\notag\\
+&\IP{{\nu}^M}{{\nu}^{\S^n}}(F(p))\ =\ 0, \text{ }\forall
+p~\in{\partial} M^n.
+\label{initial}
+\end{align}
+Since $F$ is isometric, the Riemannian structure induced by the embedding $F$
+is the same as that given by $g$, that is $(M^n, g) = (M^n, F^*\delta)$, where
+$\delta$ is the standard metric on $\R^n$.
+
+Let us denote by $A:T M\times T M \rightarrow \R$ the second fundamental form
+of $M$ with components given by $h_{ij}$ where $1\leq i,j\leq n$ where $h_{ij}=
+A(\tau_i,\tau_j)$ for two sections $\tau_i$ and $\tau_j$ in $TM$.
+For $\S^n$ we have $A^{\S^n}:T \S^n \times T\S^n\rightarrow \R$ the
+second fundamental form with components $h^{\S^n}_{ij}$ for $1\leq i,j\leq
+n$.
+%}}}
+
+\section{Auxiliary Equations}%{{{
+
+Let us define the quantities we use in the proof of the uniqueness theorem.
+Recall the function $s:M\rightarrow\R$ defined in \eqref{EQsV} above.
+When $V$ is a translation, following \cite{ecker1989mce} we term $s$ the \emph{graph quantity}.
+If, up to reparametrisation,
+\[
+F(p) = (p,u(p)) = p_ie_i + u(p)V\,,
+\]
+then one can relate the gradient of the associated scalar function $u$ to the
+reciprocal of the graph quantity $s$. This implies that a lower bound on $s$
+is equivalent to a gradient bound for $u$.
+Throughout this section we assume that $F:M^n\rightarrow\R^{n+1}$ is a smooth
+minimal immersed hypersurface.
+
+\begin{lem} The quantity $s:M\rightarrow\R$
+satisfies
+\begin{align*}
+{\Delta}^M s = - |A|^2 s\,.
+\end{align*}
+where $\Delta^M$ is the Laplace-Beltrami operator on $M$.
+\label{sevolution}
+\end{lem}
+
+Note that for any choice of orthonormal basis of the tangent space of $\S^n$
+the second fundamental form of $\S^n$ is diagonal.
+It was shown by Stahl \cite{stahl1996convergence} that on the boundary we have
+\begin{align*}
+h_{in}=h^{\S^n}_{in}=0\quad \text{ for all }\quad i=1,\ldots,n-1.
+\end{align*}
+Since $n-1$ of the tangent vectors are on the closed submanifold $\partial M\subset\S^n$ we can choose
+our basis above such that on the boundary
+\begin{align*}
+h_{ij}=0\quad  \text{ if } \quad i\neq j\,,\quad \text{ and }\quad h^{\S^n}_{ij}=\delta_{ij}\quad\text{ if }\quad i\neq j.
+\end{align*}
+\section{Minimal graphical hypersurfaces with free boundary are flat disks}
+\label{KillingSection}
+
+Now assume that
+\begin{align}
+	s \geq 0 \label{graphcondition}\,.
+\end{align}
+We shall prove Theorem \ref{thmuniqueness}.
+
+\begin{proof}
+Apply the elliptic maximum principle to the evolution of $s0\geq 0$ to see that
+there is no interior minima. On the boundary we note that $\nabla_{\nu_\S^n}s=0$ using
+$=\nu^{\S^n}$, the Neumann boundary condition and the  of the second fundamental form on the boundary. 
+
+\begin{align*}
+\nabla_{\nu_\S^n}s_v = h_{nn}\IP{\nu^{\S^n}}{K} = 0\,.
+\end{align*}
+This implies that $s_v$ has no boundary minima either.  Therefore $s_v$ is constant everywhere on $\bar M$.
+
+Returning to the evolution of $s_v$ on the interior this tells us that
+\begin{align*}
+{\Delta}^M s_V = - |A|^2 s_V\,,
+\end{align*}
+implying that either $M$ is a flat disc or $K\in TM$ everywhere on $M$, making $M$ rotationally symmetric. 
+\end{proof}
+
+\begin{rmk}
+The bounded curvature is required for the evolution of the $s_v$.
+\end{rmk}
+
+%}}}
+
+\section{Starshaped implies umbilic}%{{{
+
+A theorem of Jellet says that the only starshaped CMC surface in $\R^3$ is the round sphere.
+We wish to redo this for hypersurfaces with free boundary on the sphere.
+Right now we have something that works for surfaces.
+
+First some lemmata.
+
+\begin{lem}
+Suppose $\gamma:\S^1\rightarrow\R^3$ is a smooth closed curve such that $|\gamma| = 1$ (that is, lies on a unit sphere).
+Then the total torsion of $\gamma$ is zero.
+\end{lem}
+\begin{proof}
+Exercise yo.
+\end{proof}
+
+\begin{lem}
+Suppose $F:M^2\rightarrow\R^3$ is a smooth starshaped CMC surface with free boundary on
+$\S^2\subset\R^{3}$.
+Parametrise a connected component of the boundary $\partial M^i = \S^1$ by a smooth immersed curve $\gamma:\S^1\rightarrow\R^3$.
+Take Fermi coordinates in an annulus around $\partial M^i$, with frame oriented
+such that the first vector $T_1$ equals $\partial_s\gamma$ (here $\partial_s$
+is the arclength derivative along $\gamma$).
+Then
+\[
+	\int_{\partial M^i} h_{11}\,dS = \text{sumthin}\,.
+\]
+\end{lem}
+\begin{proof}
+Calculating, $\gamma \perp \gamma_s$ and
+\[
+	0 = \partial^2_s|\gamma|^2 = \IP{\gamma}{\gamma_{ss}} + 1
+	\,,
+\]
+so the curvature vector for $\gamma$ has unit length projection onto the normal bundle of the sphere.
+Now the Frenet-Serret formula tells us that (here we use the notation that
+$\{T,N,B\}$ denote the tangent, normal, and binormal respectively)
+\[
+	T_s = \kappa N\,,\qquad
+	N_s = -\kappa T + \tau B\,,\qquad
+	B_s = -\tau N\,.
+\]
+We wish to compare this frame with $\{\gamma_s,\gamma,\gamma_s\times\gamma\}$.
+(Note that this frame is $\{T,\nu^{\S^2},\nu\}$.)
+Clearly we have
+\[
+	\gamma\times (\gamma_s\times\gamma) = \gamma_s\,,\qquad
+	(\gamma_s\times\gamma)\times\gamma_s = \gamma\,.
+\]
+Note that $\gamma_s = T$.
+Since $h_{11} = \IP{\gamma_{ss}}{\gamma_s\times\gamma}$ and $\gamma_{ss} \perp \gamma_s$, we find
+\[
+	\gamma_{ss} = -\gamma + \IP{\gamma_s\times\gamma}{\gamma_{ss}}\gamma_s\times\gamma
+	 = -\gamma + h_{11}\nu
+	\,.
+\]
+We verify that
+\[
+	\int_{\S} h_{11}\,ds
+	= \int_{\S} \IP{\gamma_{ss}}{\gamma_s\times\gamma}\,ds
+	= - \int_{\S} \IP{\gamma_{s}}{\gamma_{ss}\times\gamma}\,ds
+	=   \int_{\S} \IP{\gamma_{s}}{\gamma\times\gamma_{ss}}\,ds
+	\,.
+\]
+Calculating from the cross product, we also have
+\begin{align*}
+	\gamma_{ss} &= \gamma_s\times(\gamma_s\times\gamma)
+	+ \gamma\times(\gamma_{ss}\times\gamma + \gamma_s\times\gamma_s)
+	\\&=
+	               -\gamma
+		       + \gamma\times(\gamma_{ss}\times\gamma)
+		       \,.
+\end{align*}
+Now $\IP{\nu}{T} = 0$ and 
+\[
+	h_{11}\IP{\nu}{N} = \kappa + \IP{\gamma}{N} = \kappa - \kappa^{-1}
+	\,,
+\]
+\[
+	h_{11}\IP{\nu}{B} = \IP{\gamma}{B}
+	\,.
+\]
+One interesting equation is
+\[
+	h_{11}^2 = \kappa^2 + 1 - 2(-1) = \kappa^2 + 3\,.
+\]
+\[
+	\nu = \IP{\nu}{N}N + \IP{\nu}{B}B
+\]
+\[
+	h_{11} = \kappa\IP{\nu}{N}
+\]
+\[
+	\IP{\gamma}{B}_s = \IP{\gamma}{-\tau N} = -\tau\IP{\gamma}{N}
+\]
+\[
+	(\IP{\gamma}{B}/\IP{\nu}{B})_s
+	= -\tau\IP{\gamma}{N}/\IP{\nu}{B} + \tau\IP{\gamma}{B}\IP{\nu}{N}/\IP{\nu}{B}^2 - \IP{\gamma}{N}\IP{\nu_s}{B}/\IP{\nu}{B}^2
+\]
+\end{proof}
+
+\begin{thm}
+Suppose $F:M^2\rightarrow\R^3$ is a smooth starshaped CMC surface with free boundary on
+$\S^2\subset\R^{3}$.
+Then $F(M^2)$ is a union of umbilics, that is, pieces of planes and spheres. In
+particular, if $M^2$ is connected, $F(M^2)$ is a flat disk or spherical cap.
+\end{thm}
+\begin{proof}
+We may assume without loss of generality that $H \ge 0$. (If not, perform the
+proof for the new surface $\hat F:M^2\rightarrow\R^3$ defined by reversing the
+orientation of $F$ so that $\hat H = -H \ge 0$.)
+
+Note that in the following calculations boundary integrands are always
+evaluated in Fermi coordinates where the $n$-th direction is taken to be normal
+to the boundary pointing away from the interior of $\S^n$.
+Since
+\[
+\Delta |F|^2 = -2H\IP{F,\nu} + 2n
+\]
+we have
+\[
+2\int_{\partial M} \IP{F}{\nabla_n F}\,dS
+ = -2H\int_M \IP{F}{\nu}\,d\mu + 2n\mu(M)
+\,.
+\]
+Now $\Delta \IP{F}{\nu} = H - |A|^2\IP{F}{\nu}$ so
+\[
+\int_M H-|A|^2\IP{F}{\nu}\,d\mu
+ = \int_{\partial M} h_{nn}\,dS
+\,.
+\]
+Combining these yields
+\begin{equation}
+\int_{\partial M} (H - nh_{nn})\,dS
+ = \int_M (n|A|^2 - H^2)\IP{F}{\nu}\,d\mu
+ \ge 0
+\label{EQumbilic}
+\end{equation}
+with equality iff $F$ is umbilic.
+
+Now we specialise to $n=2$. We calculate
+\[
+\int_{\partial M} (H-nh_{22})\,dS
+ = -\int_{\partial M} H\,dS +
+  + 2\int_{\partial M} h_{11}\,dS
+ = -HL(\partial M)
+\,,
+\]
+by the two lemmata above.
+Thus
+\[
+\int_{\partial M} (H-nh_{22})\,dS
+ = -HL(\partial M)
+ \le 0
+\,.
+\]
+Combining this with \eqref{EQumbilic} yields the result.
+\end{proof}
+
+%A higher-dimensional version seems possible.
+%
+%\begin{thm}
+%Suppose $F:M^n\rightarrow\R^{n+1}$ is a smooth starshaped CMC surface with free boundary on
+%$\S^n\subset\R^{n+1}$.
+%Then $F(M^n)$ is a union of umbilics, that is, pieces of planes and spheres. In
+%particular, if $M^n$ is connected, $F(M^n)$ is a flat disk or spherical cap.
+%\end{thm}
+%\begin{proof}
+%We may assume without loss of generality that $H \ge n$. (If not, perform the proof for the new surface $\hat F:M^2\rightarrow\R^3$ defined by reversing the orientation of $F$ so that $\hat H = -H \ge n$.)
+%
+%Note that in the following calculations boundary integrands are always
+%evaluated in Fermi coordinates where the $n$-th direction is taken to be normal
+%to the boundary pointing away from the interior of $\S^n$.
+%Since
+%\[
+%\Delta |F|^2 = -2H\IP{F,\nu} + 2n
+%\]
+%we have
+%\[
+%2\int_{\partial M} \IP{F}{\nabla_n F}\,dS
+% = -2H\int_M \IP{F}{\nu}\,d\mu + 2n\mu(M)
+%\,.
+%\]
+%Now $\Delta \IP{F}{\nu} = H - |A|^2\IP{F}{\nu}$ so
+%\[
+%\int_M H-|A|^2\IP{F}{\nu}\,d\mu
+% = \int_{\partial M} h_{nn}\,dS
+%\,.
+%\]
+%Combining these yields
+%\begin{equation}
+%\int_{\partial M} (H - nh_{nn})\,dS
+% = \int_M (n|A|^2 - H^2)\IP{F}{\nu}\,d\mu
+% \ge 0
+%\label{EQumbilic}
+%\end{equation}
+%with equality iff $F$ is umbilic.
+%
+%We calculate
+%\[
+%\int_{\partial M} (H-nh_{22})\,dS
+% = -n\int_{\partial M} h_{22}\,dS + H\mu^\partial(\partial M)
+%\,,
+%\]
+%%since the second fundamental form on the boundary is the identity, in particular constant, we have also in particular $H^\partial$ constant (and equal to $(n-1)$).
+%Then, since $H$ is also constant, we conclude that on the boundary $h_{nn}$ must also be constant.
+%This implies
+%\[
+%\int_{\partial M} (H-nh_{22})\,dS
+% = -n(H-H^\partial)\mu^\partial(\partial M) + H\mu^\partial(\partial M)
+% = (n-1)(n-H)L(\partial M)
+% \le 0
+%\,.
+%\]
+%Combining this with \eqref{EQumbilic} yields the result.
+%\end{proof}
+
+\begin{lem}
+If \(M^2 \subseteq \R^3\) is a CMC hypersurface with boundary \(\partial M \subseteq \S^2\) meeting \(\S^2\) orthogonally, then \(\partial M\) is a union of geodesic circles.
+\end{lem}
+
+\begin{proof}
+Along \(\partial M\) we have
+\[
+\nu^M \perp \nu^{\S^2} = F = \nu^{\partial M}
+\]
+where \(F\) is the position vector field in \(\R^3\), \(\nu^M\) is the unit normal to \(M \subseteq \R^3\), \(\nu^{\S^2}\) is the unit normal to \(\S^2 \subseteq \R^3\) and \(\nu_{\partial M}\) is the unit normal to \(\partial M \subseteq M\).
+
+Let us write \(\gamma\) for a connected component of \(\partial M\) and parametrise it by arc-length. Let \(T = \gamma_s\) be the unit tangent vector. Write
+\[
+\gamma_{ss} = \kappa^{\R^3} N^{\R^3}
+\]
+with \(\kappa^{\R^3}\) the geodesic curvature of \(\gamma\) (defined up to sign) as a curve in \(\R^3\) and \(N^{\R^3}\) the unit normal to \(\gamma\) in \(\R^3\). Note that since \(\gamma \subseteq \S^2\), we have \(\kappa^{\R^3} \ne 0\) and so \(N^{\R^3} = \tfrac{\gamma_{ss}}{|\gamma_{ss}|}\) is well defined.
+
+Let us also write
+\[
+\kappa^M N^M = \pi_{TM} (\gamma_{ss}) = \gamma_{ss} - \IP{\gamma_{ss}}{\nu^M}.
+\]
+That is \(\kappa^M N^M\) is the projection of \(\gamma_{ss}\) onto the tangent space to \(M\). Since \(M\) is oriented, we may choose \(N^M\) such that \(\{T, N^M\}\) forms an oriented, orthonormal basis of \(TM\) along \(\partial M\) so that
+\[
+\kappa^M = \IP{\gamma_{ss}}{N^m}
+\]
+is defined possibly taking positive and negative values. Note also that since \(|\gamma_s| = 1\), \(\gamma_{ss} \perp \gamma_s = T\) and so \(N^M \perp T\). Note that \(\{T, \nu^{\partial M}\}\) also forms an oriented, orthonormal basis of \(TM\) along \(\partial M\) so that we may choose
+\[
+N^M = \nu^{\partial M} = \nu^{\S^2} = \gamma.
+\]
+In fact, from \(|\gamma| = 1\), we have \(\IP{\gamma_s}{\gamma} = 0\) and hence
+\[
+0 = \partial_s \IP{\gamma_s}{\gamma} = \IP{\gamma_{ss}}{\gamma} + \IP{\gamma_s}{\gamma_s}.
+\]
+That is,
+\[
+\kappa^M = \IP{\gamma_{ss}}{\gamma} = -\IP{\gamma_s}{\gamma_s} = -1.
+\]
+
+Now, the second fundamental form, \(h\) of \(M\) is defined by,
+\[
+D_X Y = \nabla^M_X Y - h(X, Y) \nu^M
+\]
+where \(D\) is the Euclidean connection on \(\R^3\) and \(\nabla^M_X Y = \pi_{TM} (D_X Y)\) is projection of \(D_X Y\) onto \(TM\). Then
+\[
+h(X, Y) = - \IP{D_X Y}{\nu^M} = \IP{Y}{D_X \nu^M}.
+\]
+
+We then have
+\[
+\gamma_{ss} = D_T T = \kappa^{\R^3} N^{\R^3} = \kappa^M N^M - h(T, T) \nu^M = N^M - h(T, T) \nu^M.
+\]
+In particular,
+\[
+(\kappa^{\R^3})^2 = (\kappa^M)^2 + h(T, T)^2 = 1 + h(T, T)^2
+\]
+since \(N^M \in TM\) so that \(N^M \perp \nu^M\).
+
+Moreover we have
+\[
+\IP{D_T \nu^M}{N^M} = - \IP{\nu^M}{D_T N^M} = -\IP{\nu^M}{D_T \gamma} = \IP{\nu^M}{T} = 0.
+\]
+That is, \(D_T \nu^M \perp N^M\) and since \(\D_T \nu^M \in TM = \text{span} \{T, N^M\}\) we have
+\[
+D_T \nu^M = h(T, T) T.
+\]
+Likewise,
+\[
+\IP{D_{N^M} \nu^M}{T} = -\IP{\nu^M}{D_{N^M} T} = -\IP{\nu^M}{D_T N^M} = \IP{D_T \nu^M}{N^M} = 0,
+\]
+and hence
+\[
+D_{N^M} \nu^M = h(N^M, N^M) N^M.
+\]
+
+Now we show that \(h(N^M, N^M) \equiv \text{constant}\) along \(\partial M\). We have
+\[
+D_T \left(h(N^M, N^M)\right) = D_T \IP{N^M}{D_{N^M} \nu^M} = \IP{D_T N^M}{D_{N^M} \nu^M} + \IP{N^M}{D_T D_{N^M} \nu^M}.
+\]
+
+The first term in the sum on the right vanishes because
+\[
+\IP{D_T N^M}{D_{N^M} \nu^M} = h(N^M, N^M) \IP{D_T N^M}{N^M} = \frac{1}{2} h(N^M, n^M) D_T \IP{N^M}{N^M} = 0.
+\]
+
+The second term in the sum also vanishes. To see this, first parametrise a neighbourhood of \(\partial M\) in \(M\) by
+\[
+\varphi(r, s) = \exp^M_{\gamma(s)} (r N^M(\gamma(s))).
+\]
+Then
+\[
+\varphi_{\ast} \partial_r |_{r=0} = N^M, \quad \varphi_{\ast} \partial_s |_{r=0} T.
+\]
+By an abuse of notation, we write for any \(r\),
+\[
+\varphi_{\ast} \partial_r = N^M, \quad \varphi_{\ast} \partial_s = T
+\]
+the extension of \(T, N^M\) to the neighbourhood. Now we have
+\[
+[T, N^M] = \varphi_{\ast} [\partial_s, \partial_r] = 0
+\]
+and since for each fixed \(s\), \(r \mapsto \exp^M_{\gamma(s)} (rN^M(\gamma(s)))\) is a geodesic with velocity vector \(N^M\), we also have
+\[
+\nabla^M_{N^M} N^M = 0.
+\]
+
+Now we compute,
+\[
+\begin{split}
+\IP{N^M}{D_T D_{N^M} \nu^M} &= \IP{N^M}{D_{N^M} D_T \nu^M + D_{[T, N^M]} \nu^M} \\
+&= D_{N^M} \IP{N^M}{D_T \nu^M} - \IP{D_{N^M} N^M}{D_T \nu^M} + \IP{N^M}{D_{[T, N^M]} \nu^M} \\
+&= D_{N^M} \IP{N^M}{h(T, T) T} - \IP{\nabla^M_{N^M} N^M - h(N^M, N^M) N^M}{h(T, T) T} \\
+&= -\IP{\nabla^M_{N^M} N^M}{h(T, T) T} 
+\end{split}
+\]
+where the last equality follows since \(N^M \perp T\). Using that relation again, to finish we have
+\[
+\begin{split}
+\IP{N^M}{D_T D_{N^M} \nu^M} &= -\nabla^M_{N^M} \IP{N^M}{h(T, T) T} + \IP{N^M}{\nabla^M_{N^M} [h(T, T) T]} \\
+&= \IP{N^M}{h(T, T) \nabla^M_{N^M} T} \\
+&= h(T, T) \IP{N^M}{\nabla^M_T N^M} \\
+&= \frac{1}{2} h(T, T) D_T \IP{N^M}{N^M} = 0.
+\end{split}
+\]
+
+Thus we obtain that along \(\partial M\), \(h(N^M, N^M)\) is constant.
+
+So far all we have assumed is that \(\partial M\) meets \(\S^2\) orthogonally. Now we have use that \(M\) is CMC to conclude
+\[
+h(T, T) = H - h(N, N) \equiv \text{constant}
+\]
+and hence
+\[
+\kappa^{\R^3} = \sqrt{1 + h(T, T)^2} \equiv \text{constant}
+\]
+and therefore \(\gamma\) is a circle in a plane, that is a geodesic circle on \(\S^2\).
+\end{proof}
+
+\section*{acknowledgements}
+
+\bibliographystyle{plain}
+\bibliography{mbib}
+
+\end{document}
