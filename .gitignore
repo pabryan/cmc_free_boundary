@@ -11,3 +11,5 @@ main.pdf
 *.fdb_latexmk
 *.out
 auto/
+CMC_in_Bn.pdf
+Rotationally_graphical_CMC_in_Bn.pdf
