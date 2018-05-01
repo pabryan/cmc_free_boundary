@@ -77,6 +77,7 @@
 \newtheorem*{ulem}{Lemma}
 \newtheorem*{defn}{Definition}
 \newtheorem{conds}[thm]{Conditions}
+\newtheorem{ass}[thm]{Assumption}
 
 \theoremstyle{remark}
 \newtheorem*{rmk}{Remark}
@@ -484,55 +485,48 @@ Let us also write
 That is the curvature vector, \(\vec{\kappa}\) in \(M\) is the projection of \(\gamma_{ss}\), the Euclidean curvature vector onto the tangent space to \(M\). Note \(\{T, \nu^{\partial M}\}\) forms an oriented, orthonormal basis of \(TM\) along \(\partial M\) so that \(N = \nu^{\partial M}\) is a unit length normal field to \(\gamma\)  in \(M\). Then as \(\vec{\kappa} \perp T\) we may write 
 \begin{equation}
 \label{eq:boundary_kappa}
-\vec{\kappa} = \kappa N, \quad \kappa = \IP{\vec{\kappa}}{N} = \IP{\gamma_{ss}}{\gamma}.
+\vec{\kappa} = -\kappa N, \quad \kappa = -\IP{\vec{\kappa}}{N} = -\IP{\gamma_{ss}}{\gamma}.
 \end{equation}
 Finally, using equation \eqref{eq:gauss} for the second fundamental form and equations \eqref{eq:euclidean_kappa}, \eqref{eq:boundary_kappa_vector} and \eqref{eq:boundary_kappa} for the geodesic curvatures we have 
 \[
-\kappa N = \pi_{TM} (\kappa^{\R^3} N^{\R^3}) = \pi_{TM} (\nabla_T T + h(T, T) \nu^M) = \nabla_T T.
+\kappa N = -\pi_{TM} (D_T T) = -\pi_{TM} (\nabla_T T + h(T, T) \nu^M) = -\nabla_T T.
 \]
 Since \(T \perp N\) we also have
 \[
-0 = \partial_T [g(T, N)] = g(\nabla_T T, N) + g(T, \nabla_T N) = \kappa + g(T, \nabla_T N).
+0 = \partial_T [g(T, N)] = g(\nabla_T T, N) + g(T, \nabla_T N) = -\kappa + g(T, \nabla_T N).
 \]
 As \(N\) is unit length, \(\nabla_T N \perp N\) and hence we obtain the Frenet-Serret equations,
 \begin{equation}
 \label{eq:frenet_serret}
-\nabla_T T = \kappa N, \quad \nabla_T N = -\kappa T.
+\nabla_T T = -\kappa N, \quad \nabla_T N = \kappa T.
 \end{equation}
 
-\begin{lem}
-If \(M^2 \subseteq \R^3\) is a CMC hypersurface with boundary \(\partial M \subseteq \S^2\) meeting \(\S^2\) orthogonally, then \(\partial M\) is a union of geodesic circles.
+We have a simple lemma regarding the curvature of \(M\) and \(\partial M\) along \(\partial M\).
+
+\begin{lem}[{\cite[Lemma 2]{ros1995stability}}]
+\label{lem:boundary_curvature}
+Let \(M^2 \subseteq \R^3\) be a hypersurface with boundary \(\partial M \subseteq \S^2\) meeting \(\S^2\) orthogonally and let \(\gamma\) be a connected component of \(\partial M\) with unit tangent \(T\) and normal vector \(N\) in \(M\).
+
+Then, \(\kappa \equiv 1\) and \(\{T, N\}\) digonalises \(h\) with respect to \(g\) along \(\gamma\).
 \end{lem}
 
 \begin{proof}
-In fact, from \(|\gamma| = 1\), we have \(\IP{\gamma_s}{\gamma} = 0\) and hence
+From \(|\gamma| = 1\), we have \(\IP{\gamma_s}{\gamma} = 0\) and hence
 \[
 0 = \partial_s \IP{\gamma_s}{\gamma} = \IP{\gamma_{ss}}{\gamma} + \IP{\gamma_s}{\gamma_s}.
 \]
-Thus, using the definition \eqref{eq:boundary_kappa},
-\begin{equation}
-\label{eq:boundary_kappa_const}
-\kappa = \IP{\gamma_{ss}}{\gamma} = -\IP{\gamma_s}{\gamma_s} = -1.
-\end{equation}
-
-
-We now have using the definition of the second fundamental form and equation \eqref{eq:boundary_kappa_const},
+Thus, using definition \eqref{eq:boundary_kappa},
 \[
-\gamma_{ss} = \kappa^{\R^3} N^{\R^3} = D_T T = \nabla_T T - h(T, T)\nu^M = \kappa N - h(T, T) \nu^M = -N - h(T, T) \nu^M.
+\kappa = -\IP{\gamma_{ss}}{\gamma} = \IP{\gamma_s}{\gamma_s} = 1.
 \]
-In particular,
-\[
-(\kappa^{\R^3})^2 = (\kappa)^2 + h(T, T)^2 = 1 + h(T, T)^2
-\]
-since \(N \in TM\) so that \(N \perp \nu^M\).
 
-Moreover we have
+Using the orthogonal boundary condition in equation \eqref{eq:boundary_orthgonal}: \(N = \nu^{\partial M} = F(\gamma) = \gamma\), we obtain
 \[
-\IP{D_T \nu^M}{N} = - \IP{\nu^M}{D_T N} = -\IP{\nu^M}{D_T \gamma} = \IP{\nu^M}{T} = 0.
+\IP{D_T \nu^M}{N} = -\IP{\nu^M}{D_T N} = -\IP{\nu^M}{D_T \gamma} = -\IP{\nu^M}{T} = 0.
 \]
-That is, \(D_T \nu^M \perp N\) and since \(D_T \nu^M \in TM = \text{span} \{T, N\}\) we have
+That is, \(D_T \nu^M \perp N\) and since \(D_T \nu^M \in TM = \text{span} \{T, N\}\) we have \(D_T \nu^M\) is proportional to \(T\). The formula \eqref{eq:sff} for \(h\) is \(h(T, T) = -\IP{D_T \nu^M}{T}\) so that
 \[
-D_T \nu^M = h(T, T) T.
+-D_T \nu^M = h(T, T) T.
 \]
 Likewise,
 \[
@@ -540,21 +534,59 @@ Likewise,
 \]
 and hence
 \[
-D_{N} \nu^M = h(N, N) N.
+-D_N \nu^M = h(N, N) N.
 \]
-Therefore \(\{T, N\}\) diagonalises \(h\) along \(\gamma\).
 
-Now we show that \(h(N, N) \equiv \text{constant}\) along \(\partial M\). We have
+Therefore \(\{T, N\}\) diagonalises \(h\) with respect to \(g\) along \(\gamma\) since again from the formula \eqref{eq:sff},
 \[
-D_T \left(h(N, N)\right) = D_T \IP{N}{D_{N} \nu^M} = \IP{D_T N}{D_{N} \nu^M} + \IP{N}{D_T D_{N} \nu^M}.
+h(X, Y) = g(-D_X \nu^M, Y) = g(-D_Y \nu^M, X).
 \]
-
-The first term in the sum on the right vanishes because
+Note that we also have
 \[
-\IP{D_T N}{D_{N} \nu^M} = h(N, N) \IP{D_T N}{N} = \frac{1}{2} h(N, n^M) D_T \IP{N}{N} = 0.
+h(T, N) = - \IP{D_T \nu^M}{N} = 0.
 \]
+\end{proof}
 
-The second term in the sum also vanishes. To see this, first parametrise a neighbourhood of \(\partial M\) in \(M\) by
+\begin{rmk}
+We now have using the definition of the second fundamental form, \eqref{eq:gauss} and Lemma \ref{lem:boundary_curvature},
+\[
+\gamma_{ss} = \kappa^{\R^3} N^{\R^3} = D_T T = \nabla_T T + h(T, T)\nu^M = -\kappa N + h(T, T) \nu^M = -N + h(T, T) \nu^M.
+\]
+In particular we may relate the various curvatures along \(\gamma\):
+\begin{equation}
+\label{eq:boundary_curvature_relations}
+(\kappa^{\R^3})^2 = \kappa^2 + h(T, T)^2 = 1 + h(T, T)^2
+\end{equation}
+since \(N \in TM\) so that \(\{N, \nu^M\}\) are orthonormal.
+\end{rmk}
+
+Next we compute the variation of \(h(N, N)\) along \(\partial M\).
+
+\begin{lem}
+\label{lem:hNN_variation}
+Let \(M^2 \subseteq \R^3\) be a hypersurface with boundary \(\partial M \subseteq \S^2\) meeting \(\S^2\) orthogonally and let \(\gamma\) be a connected component of \(\partial M\) with unit tangent \(T\) and normal vector \(N\) in \(M\).
+
+Then,
+\[
+\partial_T [h(N, N)] = {\color{red} 0}.
+\]
+\end{lem}
+
+\begin{proof}
+We have
+\[
+-\partial_T [h(N, N)] = \partial_T [\IP{N}{D_{N} \nu^M}] = \IP{D_T N}{D_{N} \nu^M} + \IP{N}{D_T D_{N} \nu^M}.
+\]
+The first term in the sum on the right hand side vanishes because by lemma \ref{lem:boundary_curvature}, \(D_N\nu^M = -h(N, N) N\) and hence,
+\[
+\IP{D_T N}{D_{N} \nu^M} = -h(N, N) \IP{D_T N}{N} = -\frac{1}{2} h(N, N) \partial_T [\IP{N}{N}] = 0.
+\]
+Thus we have
+\begin{equation}
+\label{eq:hNN_variation}
+\partial_T [h(N, N)] = - \IP{N}{D_T D_{N} \nu^M}.
+\end{equation}
+To compute equation \eqref{eq:hNN_variation}, first parametrise a neighbourhood of \(\partial M\) in \(M\) by
 \[
 \varphi(r, s) = \exp^M_{\gamma(s)} (r N(\gamma(s))).
 \]
@@ -562,49 +594,98 @@ Then
 \[
 \varphi_{\ast} \partial_r |_{r=0} = N, \quad \varphi_{\ast} \partial_s |_{r=0} T.
 \]
-By an abuse of notation, we write for any \(r\),
+Let us write
 \[
-\varphi_{\ast} \partial_r = N, \quad \varphi_{\ast} \partial_s = T
+\varphi_{\ast} \partial_r = \bar{N}, \quad \varphi_{\ast} \partial_s = \bar{T}
 \]
-the extension of \(T, N\) to the neighbourhood. Now we have
-\[
-[T, N] = \varphi_{\ast} [\partial_s, \partial_r] = 0
-\]
-and since for each fixed \(s\), \(r \mapsto \exp^M_{\gamma(s)} (rN(\gamma(s)))\) is a geodesic with velocity vector \(N\), we also have
-\[
-\nabla_{N} N = 0.
-\]
+so that \(\bar{T}, \bar{N}\) are extensions of \(T, N\) to the neighbourhood. That is, \(\bar{T}(r=0) = T\) and \(\bar{N}(r=0) = N\).
 
-Now we compute,
+We also have
+\begin{equation}
+\label{eq:commutator}
+[\bar{T}, \bar{N}] = \varphi_{\ast} [\partial_s, \partial_r] = 0 \Rightarrow \nabla_{\bar{T}} \bar{N} = \nabla_{\bar{N}} \bar{T}.
+\end{equation}
+Since for each fixed \(s\), \(\mu_s : r \mapsto \exp^M_{\gamma(s)} (rN(\gamma(s)))\) is a geodesic with velocity vector \(\bar{N}\), we have
+\begin{equation}
+\label{eq:geodesic_variation}
+\nabla_{\bar{N}} \bar{N} = 0.
+\end{equation}
+
+Let us also note that for each fixed \(s\), \(\mu_s (r) = \varphi(r, s)\) is a geodesic hence \(J_s (r) = \bar{T}(r, s)\) is a Jacobi field along \(\mu_s\) determined uniquely by
+\begin{equation}
+\label{eq:jacobi}
+J_s(0) = T(s), \quad J_s'(0) = \nabla_{\bar{N}} \bar{T}|_{r=0} = \nabla_{\bar{T}} \bar{N}|_{r=0} = \nabla_T N = \kappa(s) T (s) = T (s)
+\end{equation}
+where we used equation \eqref{eq:commutator} to swap the order of differentiation and with the last equality following from Lemma \ref{lem:boundary_curvature}.
+
+Now, since the curvature of Euclidean space vanishes: \(0 = D_{\bar{N}} D_{\bar{T}} \nu^M - D_{\bar{N}} D_{\bar{T}} \nu^M - D_{[\bar{T}, \bar{N}]} \nu^M\), and the Lie bracket term vanishes by \eqref{eq:commutator}, we have
+\[
+\IP{\bar{N}}{D_{\bar{T}} D_{\bar{N}} \nu^M} = \IP{\bar{N}}{D_{\bar{N}} D_{\bar{T}} \nu^M + D_{[\bar{T}, \bar{N}]} \nu^M} = \IP{\bar{N}}{D_{\bar{N}} D_{\bar{T}} \nu^M}
+\]
+Then using Lemma \ref{lem:boundary_curvature} and equation \eqref{eq:geodesic_variation}, we have
 \[
 \begin{split}
-\IP{N}{D_T D_{N} \nu^M} &= \IP{N}{D_{N} D_T \nu^M + D_{[T, N]} \nu^M} \\
-&= D_{N} \IP{N}{D_T \nu^M} - \IP{D_{N} N}{D_T \nu^M} + \IP{N}{D_{[T, N]} \nu^M} \\
-&= D_{N} \IP{N}{h(T, T) T} - \IP{\nabla_{N} N - h(N, N) N}{h(T, T) T} \\
-&= -\IP{\nabla_{N} N}{h(T, T) T} 
+\IP{\bar{N}}{D_{\bar{T}} D_{\bar{N}} \nu^M} &= \partial_{\bar{N}} \IP{\bar{N}}{D_{\bar{T}} \nu^M} - \IP{D_{\bar{N}} \bar{N}}{D_{\bar{T}} \nu^M} \\
+&= -\partial_{\bar{N}} \IP{\bar{N}}{h(\bar{T}, \bar{T}) \bar{T}} - \IP{\nabla_{\bar{N}} \bar{N} + h(\bar{N}, \bar{N}) \bar{N}}{h(\bar{T}, \bar{T}) \bar{T}} \\
+&= -\partial_{\bar{N}} \IP{\bar{N}}{h(\bar{T}, \bar{T}) \bar{T}} - h(\bar{N}, \bar{N}) h(\bar{T}, \bar{T}) \IP{\bar{N}}{\bar{T}}.
 \end{split}
 \]
-where the last equality follows since \(N \perp T\). Using that relation again, to finish we have
+
+Evaluating at \(r = 0\) and using the fact that \(\IP{\bar{N}}{\bar{T}}|_{r=0} = \IP{N}{T} = 0\) we have that equation \eqref{eq:hNN_variation} becomes
 \[
 \begin{split}
-\IP{N}{D_T D_{N} \nu^M} &= -\nabla_{N} \IP{N}{h(T, T) T} + \IP{N}{\nabla_{N} [h(T, T) T]} \\
-&= \IP{N}{h(T, T) \nabla_{N} T} \\
-&= h(T, T) \IP{N}{\nabla_T N} \\
-&= \frac{1}{2} h(T, T) D_T \IP{N}{N} = 0.
+\partial_T [h(N, N)] = -\IP{N}{D_T D_N \nu^M} &= \partial_{\bar{N}} \IP{\bar{N}}{h(\bar{T}, \bar{T}) \bar{T}}|_{r=0} \\
+&= \partial_{\bar{N}} [h(\bar{T}, \bar{T})]|_{r=0} \IP{\bar{N}}{\bar{T}}_{r=0} + h(T, T) \partial_{\bar{N}} \IP{\bar{N}}{\bar{T}}|_{r=0} \\
+&= h(T, T) \partial_{\bar{N}} \IP{\bar{N}}{\bar{T}}|_{r=0}.
 \end{split}
 \]
 
-Thus we obtain that along \(\partial M\), \(h(N, N)\) is constant.
+But now observe that by equations \eqref{eq:commutator} and \eqref{eq:geodesic_variation},
+\[
+\begin{split}
+\partial_{\bar{N}} \IP{\bar{N}}{\bar{T}} &= \IP{\nabla_{\bar{N}} \bar{N}}{\bar{T}} + \IP{\bar{N}}{\nabla_{\bar{N}} \bar{T}} \\
+&= \IP{\bar{N}}{\nabla_{\bar{T}} \bar{N}} \\
+&= \frac{1}{2} \partial_{\bar{T}} \IP{\bar{N}}{\bar{N}} \\
+&= 0
+\end{split}
+\]
+since Gauss' lemma implies that \(\IP{\bar{N}}{\bar{N}}(r, s) = \IP{N}{N}(s) = 1\) for every \(r, s\). Alternatively,
+\[
+\IP{\bar{N}}{\nabla_{\bar{T}} \bar{N}}|_{r=0} = \IP{N}{\nabla_T N} = \IP{N}{\kappa T} = 0.
+\]
 
-So far all we have assumed is that \(\partial M\) meets \(\S^2\) orthogonally. Now we have use that \(M\) is CMC to conclude
+Thus we obtain
 \[
-h(T, T) = H - h(N, N) \equiv \text{constant}
+\partial_T [h(N, N)] = 0.
 \]
-and hence
+\end{proof}
+
+Thus we obtain the important corollary:
+\begin{cor}
+Let \(M^2 \subseteq \R^3\) be a \emph{CMC} hypersurface with boundary \(\partial M \subseteq \S^2\) meeting \(\S^2\) orthogonally.
+
+Then \(\partial M\) is a disjoint union of circles of latitude, that is intersections of planes with \(\S^2\).
+\end{cor}
+
+\begin{proof}
+We prove that each connected component, \(\gamma\) of \(\partial M\) is a circle of latitude. First, the fact that \(\partial M\) is CMC implies that
 \[
-\kappa^{\R^3} = \sqrt{1 + h(T, T)^2} \equiv \text{constant}
+h(T, T) + h(N, N) = H \equiv \text{ constant}.
 \]
-and therefore \(\gamma\) is a circle in a plane, that is a geodesic circle on \(\S^2\).
+Therefore, by lemma \ref{lem:hNN_variation} we have
+\[
+\partial_T [h(T, T)] = - \partial_T [h(N, N)] = 0
+\]
+so that \(h(T, T)\) is constant along \(\partial M\).
+
+Now by the remark following Lemma \ref{lem:boundary_curvature} we have
+\[
+(\kappa^{\R^3})^2 = 1 + h(T, T)^2 \equiv \text{ constant}.
+\]
+
+Thus \(\gamma\) is a constant curvature space curve that lies on the sphere.
+
+{\color{red} Does this imply \(\gamma\) must be a circle in a plane?}
 \end{proof}
 
 \section*{acknowledgements}
