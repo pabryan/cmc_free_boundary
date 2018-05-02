@@ -633,7 +633,57 @@ Therefore we obtain
 \]
 
 {\color{red} Now what?}
+
+{\color{red} Another attempt}
+
+For any arbitrary extension \(\bar{T}, \bar{N}\) of \(T, N\) (i.e. for which equations \eqref{eq:commutator} and \eqref{eq:geodesic_variation} need not hold) we have,
+\[
+\partial_T [h(N, N)] = \partial_{\bar{N}} [h(\bar{T}, \bar{N})]|_{r=0} - h([\bar{N}, \bar{T}], \bar{N})|_{r=0} - h(\bar{T}, \nabla_{\bar{N}} \bar{N})|_{r=0}.
+\]
+
+Take the same parametrisation of a neighbourhood of \(\partial M\) with \(\bar{N} = \varphi_{\ast} \partial_r\) satisfying \(\nabla_{\bar{N}} \bar{N} = 0\) as before. But this time, let \(\bar{T}\) be the parallel translation of \(T\) along each geodesic \(\mu_s : r \mapsto \varphi(r, s)\). Thus we have
+\[
+[\bar{N}, \bar{T}]_{r=0} = \left[\nabla_{\bar{N}} \bar{T} - \nabla_{\bar{T}} \bar{N}\right]_{r=0} = - \nabla_T N = - \kappa T
+\]
+so that
+\[
+h([\bar{N}, \bar{T}], \bar{N})|_{r=0} = -\kappa h(N, T) = 0
+\]
+leading to the same conclusion that
+\[
+\partial_T [h(N, N)] = \partial_{\bar{N}} [h(\bar{T}, \bar{N})]|_{r=0}
+\]
+but this time \(\bar{T}\) is parallel along \(\mu_s\). Therefore,
+\[
+\partial_{\bar{N}} [h(\bar{T}, \bar{N})] = \partial_{\bar{N}} \IP{D_{\bar{N}} \bar{T}}{\nu^M} = \IP{D_{\bar{N}} D_{\bar{N}} \bar{T}}{\nu^M} + \IP{D_{\bar{N}} \bar{T}}{D_{\bar{N}} \nu^M}.
+\]
+Or perhaps,
+\[
+\partial_{\bar{N}} [h(\bar{T}, \bar{N})] = -\partial_{\bar{N}} \IP{\bar{T}}{D_{\bar{N}} \nu^M} = \IP{D_{\bar{N}} \bar{T}}{\nu^M} + \IP{\bar{T}}{D_{\bar{N}} D_{\bar{N}} \nu^M}.
+\]
+
+{\color{red} Both of these and presumably the third possibility also lead back to the original equation.}
 \end{proof}
+
+{\color{red} Perhaps what we have obtained so far is the best we can hope for? What if we integrate:}
+\[
+0 = \int_{\gamma} \partial_T h(N, N) ds = \int_{\gamma} \partial_{\bar{N}} h(N, T)|_{r=0} ds.
+\]
+
+{\color{red} Some other musings:}
+
+Since \(H = h(T,T) + h(N, N)\) is constant, we have \(\partial_T H \equiv 0\) and hence
+\[
+\partial_T [h(T, T)] = - \partial_T [h(N, N)].
+\]
+Now what about,
+\[
+\begin{split}
+\partial_T K &= \partial_T [h(T, T) h(N, N)] = h(N, N) \partial_T [h(T, T)] + h(T, T) \partial_T [h(N, N)] \\
+&= \partial_T [h(N, N)] [h(T, T) - h(N, N)] \\
+&= \partial_{\bar{N}} [h(\bar{T}, \bar{N})]|_{r=0} [h(T, T) - h(N, N)].
+\end{split}
+\]
 
 Thus we obtain the important corollary:
 \begin{cor}
