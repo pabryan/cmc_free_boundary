@@ -573,20 +573,7 @@ Then,
 \end{lem}
 
 \begin{proof}
-We have
-\[
--\partial_T [h(N, N)] = \partial_T [\IP{N}{D_{N} \nu^M}] = \IP{D_T N}{D_{N} \nu^M} + \IP{N}{D_T D_{N} \nu^M}.
-\]
-The first term in the sum on the right hand side vanishes because by lemma \ref{lem:boundary_curvature}, \(D_N\nu^M = -h(N, N) N\) and hence,
-\[
-\IP{D_T N}{D_{N} \nu^M} = -h(N, N) \IP{D_T N}{N} = -\frac{1}{2} h(N, N) \partial_T [\IP{N}{N}] = 0.
-\]
-Thus we have
-\begin{equation}
-\label{eq:hNN_variation}
-\partial_T [h(N, N)] = - \IP{N}{D_T D_{N} \nu^M}.
-\end{equation}
-To compute equation \eqref{eq:hNN_variation}, first parametrise a neighbourhood of \(\partial M\) in \(M\) by
+Parametrise a neighbourhood of \(\partial M\) in \(M\) by
 \[
 \varphi(r, s) = \exp^M_{\gamma(s)} (r N(\gamma(s))).
 \]
@@ -598,12 +585,10 @@ Let us write
 \[
 \varphi_{\ast} \partial_r = \bar{N}, \quad \varphi_{\ast} \partial_s = \bar{T}
 \]
-so that \(\bar{T}, \bar{N}\) are extensions of \(T, N\) to the neighbourhood. That is, \(\bar{T}(r=0) = T\) and \(\bar{N}(r=0) = N\).
-
-We also have
+so that \(\bar{T}, \bar{N}\) are extensions of \(T, N\) to the neighbourhood. That is, \(\bar{T}(r=0) = T\) and \(\bar{N}(r=0) = N\). We also have
 \begin{equation}
 \label{eq:commutator}
-[\bar{T}, \bar{N}] = \varphi_{\ast} [\partial_s, \partial_r] = 0 \Rightarrow \nabla_{\bar{T}} \bar{N} = \nabla_{\bar{N}} \bar{T}.
+[\bar{T}, \bar{N}] = \varphi_{\ast} [\partial_s, \partial_r] = 0 \quad \Rightarrow \quad \nabla_{\bar{T}} \bar{N} = \nabla_{\bar{N}} \bar{T}.
 \end{equation}
 Since for each fixed \(s\), \(\mu_s : r \mapsto \exp^M_{\gamma(s)} (rN(\gamma(s)))\) is a geodesic with velocity vector \(\bar{N}\), we have
 \begin{equation}
@@ -618,36 +603,36 @@ J_s(0) = T(s), \quad J_s'(0) = \nabla_{\bar{N}} \bar{T}|_{r=0} = \nabla_{\bar{T}
 \end{equation}
 where we used equation \eqref{eq:commutator} to swap the order of differentiation and with the last equality following from Lemma \ref{lem:boundary_curvature}.
 
-Now, since the curvature of Euclidean space vanishes: \(0 = D_{\bar{N}} D_{\bar{T}} \nu^M - D_{\bar{N}} D_{\bar{T}} \nu^M - D_{[\bar{T}, \bar{N}]} \nu^M\), and the Lie bracket term vanishes by \eqref{eq:commutator}, we have
+Now we have
 \[
-\IP{\bar{N}}{D_{\bar{T}} D_{\bar{N}} \nu^M} = \IP{\bar{N}}{D_{\bar{N}} D_{\bar{T}} \nu^M + D_{[\bar{T}, \bar{N}]} \nu^M} = \IP{\bar{N}}{D_{\bar{N}} D_{\bar{T}} \nu^M}
+\partial_T [h(N, N)] = (\nabla_T h) (N, N) + 2h(N, \nabla_{T} N).
 \]
-Then using equation \eqref{eq:geodesic_variation}, we have
+But from the Frenet-Serret equation \eqref{eq:frenet_serret} and the fact that by Lemma \ref{lem:boundary_curvature}, \(\{T, N\}\) diagonalises \(h\) we get
 \[
-\begin{split}
-\IP{\bar{N}}{D_{\bar{T}} D_{\bar{N}} \nu^M} = \IP{\bar{N}}{D_{\bar{N}} D_{\bar{T}} \nu^M} &= \partial_{\bar{N}} \IP{\bar{N}}{D_{\bar{T}} \nu^M} - \IP{D_{\bar{N}} \bar{N}}{D_{\bar{T}} \nu^M} \\
-&= -\partial_{\bar{N}} [h(\bar{N}, \bar{T})] - \IP{\nabla_{\bar{N}} \bar{N} + h(\bar{N}, \bar{N}) \bar{N}}{h(\bar{T}, \bar{T}) \bar{T}} \\
-&= -\partial_{\bar{N}} [h(\bar{N}, \bar{T})] - h(\bar{N}, \bar{N}) h(\bar{T}, \bar{T}) \IP{\bar{N}}{\bar{T}}.
-\end{split}
+h(N, \nabla_T N) = h(N, \kappa T) = \kappa h(N, T) = 0.
 \]
-
-Evaluating at \(r = 0\) and using the fact that \(\IP{\bar{N}}{\bar{T}}|_{r=0} = \IP{N}{T} = 0\) we have that equation \eqref{eq:hNN_variation} becomes
-\begin{equation}
-\label{eq:hNN_variation_2}
-\partial_T [h(N, N)] = - \IP{\bar{N}}{D_{\bar{N}} D_{\bar{T}} \nu^M}|_{r=0} = \partial_{\bar{N}} [h(\bar{N}, \bar{T})]|_{r=0}.
-\end{equation}
-
-In fact, we can obtain this relation directly using the Codazzi equation \((\nabla_{\bar{T}} h) (\bar{N}, \bar{N}) = (\nabla_{\bar{N}} h) (\bar{T}, \bar{N})\), the Frenet-Serret formula \eqref{eq:frenet_serret}, the geodesic equation \eqref{eq:geodesic_variation}, the commutation relation \eqref{eq:commutator} and Lemma \ref{lem:boundary_curvature} which implies that \(h(N, T) = 0\):
+Then applying the Codazzi equation,
 \[
 \begin{split}
-\partial_T [h(N, N)] = \partial_{\bar{T}} [h(\bar{N}, \bar{N})]|_{r=0} &= \left[(\nabla_{\bar{T}} h) (\bar{N}, \bar{N}) + 2h(\bar{N}, \nabla_{\bar{T}} \bar{N})\right]|_{r=0} \\
-&= (\nabla_{\bar{N}} h) (\bar{T}, \bar{N})|_{r=0} + 2 \kappa h(N, T) \\
-&= \partial_{\bar{N}} [h(\bar{T}, \bar{N})]|_{r=0} - h(\nabla_{\bar{N}} \bar{T}, \bar{N})|_{r=0} - h(\bar{T}, \nabla_{\bar{N}} \bar{N})|_{r=0} \\
-&= \partial_{\bar{N}} [h(\bar{T}, \bar{N})]|_{r=0} - h(\nabla_{\bar{T}} \bar{N}, \bar{N})|_{r=0} \\
-&= \partial_{\bar{N}} [h(\bar{T}, \bar{N})]|_{r=0} - \kappa h(T, N) \\
-&= \partial_{\bar{N}} [h(\bar{T}, \bar{N})]|_{r=0}.
+\partial_T [h(N, N)] &= (\nabla_T h) (N, N) = (\nabla_N h) (T, N) \\
+&= \left[\partial_{\bar{N}} [h(\bar{T}, \bar{N})] - h(\nabla_{\bar{N}} \bar{T}, \bar{N}) - h(\bar{T}, \nabla_{\bar{N}} \bar{N})\right]|_{r=0}.
 \end{split}
 \]
+The commutator equation \eqref{eq:commutator}, Frenet-Serret equation \eqref{eq:frenet_serret} and Lemma \ref{lem:boundary_curvature} again imply that
+\[
+h(\nabla_{\bar{N}} \bar{T}, \bar{N})|_{r=0} = h(\nabla_T N, N) = \kappa h(T, N) = 0,
+\]
+while the geodesic equation \eqref{eq:geodesic_variation} implies that
+\[
+h(\bar{T}, \nabla_{\bar{N}} \bar{N})|_{r=0} = 0.
+\]
+
+Therefore we obtain
+\[
+\partial_T [h(N, N)] = \partial_{\bar{N}} [h(\bar{T}, \bar{N})]|_{r=0}.
+\]
+
+{\color{red} Now what?}
 \end{proof}
 
 Thus we obtain the important corollary:
