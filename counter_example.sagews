@@ -46,12 +46,12 @@ def connection_latex(k, gamma):
 # LaTeX display of variables
 def latex_display(name, val):
     return r"$" + name + r" = " + latex(val) + r"$"
-︡d76043ec-01bb-4bd2-bba0-904faafda4dc︡{"done":true}︡
+︡e4d49057-43ba-4b23-8968-c1be4b1eddb8︡{"done":true}︡
 ︠7b2d1551-6361-43ff-9791-3b94a5225304s︠
 #### Base variables ###
 s, r = var('s, r', domain='real')
-︡81adbcd5-b5a1-469a-83cd-986d7d12345a︡{"done":true}︡
-︠d7eed68c-aea9-4ec8-bb81-a44bdfca5036s︠
+︡3014d438-8aab-4815-81aa-4b98fbc6936a︡{"done":true}
+︠d7eed68c-aea9-4ec8-bb81-a44bdfca5036︠
 # Symbolic functions for general formulae
 g1 = function('gamma1')(s)
 g2 = function('gamma2')(s)
@@ -59,21 +59,41 @@ g3 = function('gamma3')(s)
 gamma = vector([g1, g2, g3])
 f = function('f')(s)
 
-assume('g1(s)^2 + g2(s)^2 + g3(s)^3 = 1')
-︡eaa79a86-bd9c-4494-a918-51329f06ba90︡{"done":true}︡
+assume('g1(s)^2 + g2(s)^2 + g3(s)^3 = 1') # not sure if this does anything
+
+# The boundary orthongality condition implies the inner normal is -gamma
+# Our surface is constructed by following curves starting on gamma and over the inner normal
+# where "over" means in the plane including the inner normal and orthogonal to gamma
+
+# Computation is very slow using the general formulae and we seem to run out of memory!
+gammap = gamma.diff(s)
+V = gamma.cross_product(gammap)
+
+# Computation is okay using
+V = vector([0, 0, 1])
+
+F = (1-r) * gamma + r^2 * f * V
+coords = ((s, 0, 2*pi), (r, 0, 1/2))
+
+︡8ffe2ee5-87b7-4e0e-851d-c1b2b8c068d3︡{"done":true}︡
 ︠a69a576b-3a0c-4b9a-bc03-dd2c23682c6ds︠
 # Explicit functions for nice formulae and plots
-gamma = vector([cos(s), sin(s), 0])
-f = 2*cos(s)^3
-︡92357b37-6ee6-47b1-a6ae-71c879dcbaec︡{"done":true}︡
+R = 9/10
+epsilon = 1/2
+
+gamma = vector([R * cos(s/R), R * sin(s/R), sqrt(1-R^2)])
+f = 2*cos(s/R)^3
+
+gammap = gamma.diff(s)
+V = gamma.cross_product(gammap)
+F = (1-r) * gamma + r^2 * f * V
+coords = ((s, 0, 2*pi*R), (r, 0, epsilon))
+︡53355c93-16ad-4203-aa9f-066b84b8046b︡{"done":true}︡
 ︠00d7e8af-222f-40f3-a590-774bd16e4affs︠
 #### Create our surface ####
-
-F = (1-r) * gamma + vector([0, 0, f * r^2])
-coords = ((s, 0, 2*pi), (r, 0, 1/2))
 M = ParametrizedSurface3D(F, coords, 'M')
 
-︡9fe5061b-a7bb-46c1-a484-fd0a26f754a7︡{"done":true}︡
+︡452dc1c0-ef91-4c55-a13b-ec3db023d300︡{"done":true}︡
 ︠52c342cb-5236-426c-8f0f-abac5d103e9fs︠
 #### Get fundamental quantities ####
 
@@ -105,9 +125,9 @@ bdry_h = boundary_coefficients(h)
 bdry_hmatrix = matrix_form(bdry_h)
 
 
-︡da7d721f-1fb0-4b64-a96b-3142d4b8c514︡{"done":true}︡
+︡37149d10-f821-4776-840b-6b8bfa911567︡{"done":true}︡
 ︠a56baa12-51d3-4208-a273-6490b2857db8s︠
-#### Plot surface and display fundamental quantities ####
+#### Display fundamental quantities ####
 
 print("Frame along boundary")
 show(latex_display("T", T))
@@ -127,12 +147,14 @@ show(connection_latex((2,2), bdry_Gamma))
 
 print("Second fundamental form along boundary")
 show(latex_display("h", bdry_hmatrix))
+︡d72cf829-57d7-4446-8ea9-f260d47794ba︡{"stdout":"Frame along boundary\n"}︡{"html":"<div align='center'>$T = \\left(-\\sin\\left(\\frac{10}{9} \\, s\\right),\\,\\cos\\left(\\frac{10}{9} \\, s\\right),\\,0\\right) $</div>"}︡{"html":"<div align='center'>$N = \\left(-\\frac{9}{10} \\, \\cos\\left(\\frac{10}{9} \\, s\\right),\\,-\\frac{9}{10} \\, \\sin\\left(\\frac{10}{9} \\, s\\right),\\,-\\frac{1}{10} \\, \\sqrt{19}\\right) $</div>"}︡{"stdout":"Normal along boundary\n"}︡{"html":"<div align='center'>$n = \\left(-\\frac{1}{10} \\, \\sqrt{19} \\cos\\left(\\frac{10}{9} \\, s\\right),\\,-\\frac{1}{10} \\, \\sqrt{19} \\sin\\left(\\frac{10}{9} \\, s\\right),\\,\\frac{9}{10}\\right) $</div>"}︡{"stdout":"Metric along boundary\n"}︡{"html":"<div align='center'>$g = \\left(\\begin{array}{rr}\n1 &amp; 0 \\\\\n0 &amp; 1\n\\end{array}\\right) $</div>"}︡{"stdout":"Connection along boundary\n"}︡{"html":"<div align='center'>$\\nabla_{T}T = N$</div>"}︡{"html":"<div align='center'>$\\nabla_{T}N = -T$</div>"}︡{"html":"<div align='center'>$\\nabla_{N}T = -T$</div>"}︡{"html":"<div align='center'>$\\nabla_{N}N = 0$</div>"}︡{"stdout":"Second fundamental form along boundary\n"}︡{"html":"<div align='center'>$h = \\left(\\begin{array}{rr}\n\\frac{1}{9} \\, \\sqrt{19} &amp; 0 \\\\\n0 &amp; 4 \\, \\cos\\left(\\frac{10}{9} \\, s\\right)^{3}\n\\end{array}\\right) $</div>"}︡{"done":true}︡
+︠36ec9645-a490-40ba-8542-7165fd895348s︠
+#### Plot surface ####
 
-# Plot
-#p = M.plot(color='red') + sphere(opacity=0.3)
-#p.show()
-︡6b402bf3-f039-4a6d-a786-d45807888769︡{"stdout":"Frame along boundary\n"}︡{"html":"<div align='center'>$T = \\left(-\\sin\\left(s\\right),\\,\\cos\\left(s\\right),\\,0\\right) $</div>"}︡{"html":"<div align='center'>$N = \\left(-\\cos\\left(s\\right),\\,-\\sin\\left(s\\right),\\,0\\right) $</div>"}︡{"stdout":"Normal along boundary\n"}︡{"html":"<div align='center'>$n = \\left(0,\\,0,\\,1\\right) $</div>"}︡{"stdout":"Metric along boundary\n"}︡{"html":"<div align='center'>$g = \\left(\\begin{array}{rr}\n1 &amp; 0 \\\\\n0 &amp; 1\n\\end{array}\\right) $</div>"}︡{"stdout":"Connection along boundary\n"}︡{"html":"<div align='center'>$\\nabla_{T}T = N$</div>"}︡{"html":"<div align='center'>$\\nabla_{T}N = -T$</div>"}︡{"html":"<div align='center'>$\\nabla_{N}T = -T$</div>"}︡{"html":"<div align='center'>$\\nabla_{N}N = 0$</div>"}︡{"stdout":"Second fundamental form along boundary\n"}︡{"html":"<div align='center'>$h = \\left(\\begin{array}{rr}\n0 &amp; 0 \\\\\n0 &amp; 4 \\, \\cos\\left(s\\right)^{3}\n\\end{array}\\right) $</div>"}︡{"done":true}︡
-︠d94ad243-10e3-42d1-b28e-8974a69c3047s︠
+p = M.plot(color='red') + sphere(opacity=0.3)
+p.show()
+︡4f171df9-03d8-4d63-8801-d3c74ad6989d︡{"file":{"filename":"cf54b9de-0088-4119-8ac0-4b16d37b478c.sage3d","uuid":"cf54b9de-0088-4119-8ac0-4b16d37b478c"}}︡{"done":true}︡
+︠d94ad243-10e3-42d1-b28e-8974a69c3047︠
 
 #### Check computations for variation of h(N, N) ####
 
@@ -169,6 +191,7 @@ bool(bdry_h[(2,2)].diff(s) == N * boundary_vector(Ws.diff(r))) # at r = 0
 bool(boundary_vector(bdry_h[(2,2)].diff(s)) == boundary_vector(h[(1,2)].diff(r)))
 
 ︡482b5843-e345-4910-bff9-3bcc29fce9d2︡{"stdout":"Lemma 5.4\n"}︡{"stdout":"True\n"}︡{"stdout":"True\n"}︡{"stdout":"True\n"}︡{"stdout":"True\n"}︡{"stdout":"True\n"}︡{"stdout":"Lemma 5.5\n"}︡{"stdout":"True\n"}︡{"stdout":"True\n"}︡{"stdout":"True\n"}︡{"stdout":"True\n"}︡{"done":true}︡
+︠cbf3b365-b6a0-4470-afbf-af1a61b80948︠
 
 
 
